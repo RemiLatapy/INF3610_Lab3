@@ -83,8 +83,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\temp\INF3610A15Lab3\src\systemc-2.3.1\src;$(VC_IncludePath);$(WindowsSDK_IncludePath);E:\lib\systemc-2.3.1\src</IncludePath>
-    <LibraryPath>C:\temp\INF3610A15Lab3\src\systemc-2.3.1\msvc120\SystemC\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\..\systemc-2.3.1\src;$(VC_IncludePath);$(WindowsSDK_IncludePath);E:\lib\systemc-2.3.1\src</IncludePath>
+    <LibraryPath>$(SolutionDir)\..\systemc-2.3.1\msvc120\SystemC\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);E:\lib\systemc-2.3.1\src</IncludePath>
