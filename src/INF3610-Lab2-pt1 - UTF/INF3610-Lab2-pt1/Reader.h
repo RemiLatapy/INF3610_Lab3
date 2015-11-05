@@ -15,15 +15,13 @@
 //	Class Reader
 //
 ///////////////////////////////////////////////////////////////////////////////
-class Reader /* À compléter */
+class Reader : sc_channel, InterfaceRead
 {
 	public:
 		// Ports
-		/*
+		sc_port<LMBIF> dataPortRAM;										// Port pour la mémoire de donnée
 	
-		À compléter
-	
-		*/
+		virtual unsigned int Read(unsigned int offset);					// Implement InterfaceRead function
 		
 		// Constructor
 		Reader( sc_module_name name );
@@ -32,12 +30,6 @@ class Reader /* À compléter */
 		~Reader();
 
 	private:
-	
-	/*
-		
-	À compléter
-		
-	*/
 
 };
 

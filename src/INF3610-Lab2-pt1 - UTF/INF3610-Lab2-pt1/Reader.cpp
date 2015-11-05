@@ -34,9 +34,7 @@ Reader::~Reader()
 	*/
 }
 
-	/*
-
-	À compléter
-
-	*/
+unsigned int Reader::Read(unsigned int offset)  {
+	return dataPortRAM->Read(offset);
+}
 
