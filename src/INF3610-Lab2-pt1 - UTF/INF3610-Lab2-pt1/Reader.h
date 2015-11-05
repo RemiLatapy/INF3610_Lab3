@@ -15,15 +15,15 @@
 //	Class Reader
 //
 ///////////////////////////////////////////////////////////////////////////////
-class Reader : sc_channel, InterfaceRead
+class Reader : public InterfaceRead, public sc_channel
 {
-	public:
-		Reader(sc_module_name name);
-		~Reader();
+public:
+	Reader(sc_module_name name);
+	~Reader();
 
-		// Ports
-		sc_port<LMBIF> dataPortRAM;										// Port pour la mémoire de donnée
-	
-		virtual unsigned int Read(unsigned int offset);					// Implement InterfaceRead function
+	// Ports
+	sc_port<LMBIF> dataPortRAM;										// Port pour la mémoire de donnée
+
+	virtual unsigned int Read(unsigned int offset);					// Implement InterfaceRead function
 };
 

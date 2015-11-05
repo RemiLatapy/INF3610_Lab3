@@ -23,6 +23,7 @@ DataRAM::DataRAM( sc_module_name name, const char *dataFileName, unsigned long R
 ///////////////////////////////////////////////////////////////////////////////
 DataRAM::~DataRAM()
 {
+	end_of_simulation();
 }
 
 

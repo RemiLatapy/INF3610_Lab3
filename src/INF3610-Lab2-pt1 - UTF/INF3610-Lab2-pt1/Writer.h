@@ -15,7 +15,7 @@
 //	Class Writer
 //
 ///////////////////////////////////////////////////////////////////////////////
-class Writer : sc_channel, InterfaceWrite
+class Writer : public sc_channel, public InterfaceWrite
 {
 public:
 	Writer(sc_module_name name);

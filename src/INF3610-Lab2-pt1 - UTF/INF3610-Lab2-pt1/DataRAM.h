@@ -16,23 +16,23 @@
 ///////////////////////////////////////////////////////////////////////////////
 class DataRAM : public RAM
 {
-	public: 
+public:
 
-		// Constructeur
-		DataRAM( sc_module_name name, const char *dataFileName, unsigned long RAMSize = 0, bool verbose = false );
-		
-		// Destructeur
-		~DataRAM();
+	// Constructeur
+	DataRAM(sc_module_name name, const char *dataFileName, unsigned long RAMSize = 0, bool verbose = false);
 
-		// Méthode
-		unsigned int Read(unsigned int addr);
-		void Write(unsigned int addr, unsigned int data);
+	// Destructeur
+	~DataRAM();
 
-	private:	
+	// Méthode
+	unsigned int Read(unsigned int addr);
+	void Write(unsigned int addr, unsigned int data);
 
-		// Variable 
-		
-		// Méthode
-		void end_of_simulation();
+private:
+
+	// Variable 
+
+	// Méthode
+	void end_of_simulation();
 };
 

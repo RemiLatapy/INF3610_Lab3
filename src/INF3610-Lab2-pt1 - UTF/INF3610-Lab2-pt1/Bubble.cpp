@@ -11,14 +11,10 @@
 //	Constructeur
 //
 ///////////////////////////////////////////////////////////////////////////////
-Bubble::Bubble( sc_module_name name )
-/* À compléter */
+Bubble::Bubble(sc_module_name name)
+	:sc_module(name)
 {
-	/*
-	
-	À compléter
-	
-	*/
+	SC_THREAD(thread);
 }
 
 
@@ -39,12 +35,19 @@ Bubble::~Bubble()
 ///////////////////////////////////////////////////////////////////////////////
 void Bubble::thread(void)
 {
-	/*
-	
-	À compléter
-	
-	*/
-
+	unsigned int numVal = readPort->Read(0);
+	valueTab = new unsigned int[numVal];
+	unsigned int addr = 4;
+	for (unsigned int i = 0; i < numVal; i++) {
+		valueTab[i] = readPort->Read(addr);
+		addr += 4;
+	}
+	bubbleSort(valueTab, numVal);
+	addr = 4;
+	for (unsigned int i = 0; i < numVal; i++) {
+		writePort->Write(addr, valueTab[i]);
+		addr += 4;
+	}
 }
 
 
@@ -57,7 +60,7 @@ void Bubble::bubbleSort(unsigned int *ptr, int counter)
 {
 	// Variable
 	unsigned int tmp = 0;
-	
+
 	for (int i = 1; i < counter; ++i){
 		for (int j = 0; j < counter - i; ++j){
 			if (ptr[j] > ptr[j + 1]){
@@ -66,7 +69,7 @@ void Bubble::bubbleSort(unsigned int *ptr, int counter)
 				ptr[j] = ptr[j + 1];
 				ptr[j + 1] = tmp;
 			}
-	
+
 		}
 	}
 	// Display

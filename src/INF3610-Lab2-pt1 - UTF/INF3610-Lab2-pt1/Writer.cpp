@@ -1,7 +1,13 @@
 #include "Writer.h"
 
 Writer::Writer(sc_module_name name)
+:sc_channel(name)
 {
+	/*
+
+	À compléter
+
+	*/
 }
 
 

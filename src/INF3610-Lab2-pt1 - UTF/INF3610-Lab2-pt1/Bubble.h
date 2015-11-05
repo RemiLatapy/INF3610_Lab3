@@ -9,7 +9,7 @@
 #include <systemc.h>
 #include <stdio.h>
 #include "InterfaceRead.h"
-//#include "InterfaceWrite.h"		à décommenter au moment opportun
+#include "InterfaceWrite.h"
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -19,26 +19,24 @@
 ///////////////////////////////////////////////////////////////////////////////
 class Bubble : public sc_module
 {
-	public: 
-		// Ports    
-		/*
-		
-		À compléter
-		
-		*/
+public:
+	// Ports    
+	sc_port<InterfaceRead> readPort;							// Port pour le module lecteur
+	sc_port<InterfaceWrite>	writePort;							// Port pour le module écrivain
 
-	
-		// Constructor
-		Bubble( sc_module_name name );
-		
-		// Destructor
-		~Bubble();
-		
-	private:
-		// Process SystemC
-		SC_HAS_PROCESS(Bubble);
-		
-		void thread(void);
-		void bubbleSort(unsigned int *ptr, int counter);
+	// Constructor
+	Bubble(sc_module_name name);
+
+	// Destructor
+	~Bubble();
+
+private:
+	unsigned int *valueTab;
+
+	// Process SystemC
+	SC_HAS_PROCESS(Bubble);
+
+	void thread(void);
+	void bubbleSort(unsigned int *ptr, int counter);
 };
 
