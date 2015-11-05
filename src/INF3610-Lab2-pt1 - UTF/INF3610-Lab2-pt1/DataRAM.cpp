@@ -10,8 +10,8 @@
 //	Constructeur
 //
 ///////////////////////////////////////////////////////////////////////////////
-DataRAM::DataRAM( sc_module_name name, const char *dataFileName, unsigned long RAMSize, bool verbose )
-:RAM(name, dataFileName, RAMSize, verbose)
+DataRAM::DataRAM(sc_module_name name, const char *dataFileName, unsigned long RAMSize, bool verbose)
+	:RAM(name, dataFileName, RAMSize, verbose)
 {
 }
 
@@ -38,25 +38,25 @@ unsigned int DataRAM::Read(unsigned int addr)
 	return RAM::Read(addr);
 }
 
-	
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 //	Write
 //
 ///////////////////////////////////////////////////////////////////////////////
 void DataRAM::Write(unsigned int addr, unsigned int data)
-{		
-	if ( addr >= m_RAMSize )
+{
+	if (addr >= m_RAMSize)
 	{
 		cout << "Écriture hors de la plage de la RAM" << endl;
-		
+
 		// Fin de la simulation
 		sc_stop();
 	}
 	else
-	{			
+	{
 		// On copie le contenu de la mémoire
-		memcpy( (void*)((unsigned int)(m_ptrRAM) + addr), &data, 4);
+		memcpy((void*)((unsigned int)(m_ptrRAM)+addr), &data, 4);
 	}
 }
 
@@ -71,21 +71,21 @@ void DataRAM::end_of_simulation()
 	// Variable
 	FILE * file;
 	unsigned long size;
-	
+
 	// Ouverture du fichier de sortie
-	file = fopen( this->name() , "wb" );
-	
+	file = fopen(this->name(), "wb");
+
 	// Validation de l'ouverture du fichier
 	if (file == 0)
 		cout << "Erreur lors de l'ouverture du fichier de sortie" << endl;
 	else
 	{
 		// Écriture
-		size = fwrite(m_ptrRAM , 1 , m_RAMSize , file );
-		
-		if ( m_RAMSize != size )
+		size = fwrite(m_ptrRAM, 1, m_RAMSize, file);
+
+		if (m_RAMSize != size)
 			cout << "La RAM n'a pas été toute sauvegardée dans le fichier de sortie" << endl;
-		
+
 		// Fermeture du fichier
 		fclose(file);
 	}
