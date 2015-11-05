@@ -1,29 +1,24 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-//	Reader.h
+//	InterfaceWrite.h
 //
 ///////////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
 #include <systemc.h>
-#include "LMBIF.h"
-#include "InterfaceRead.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-//	Class Reader
+//	Classe InterfaceWrite
 //
 ///////////////////////////////////////////////////////////////////////////////
-class Reader : sc_channel, InterfaceRead
+class InterfaceWrite : public virtual sc_interface
 {
-	public:
-		Reader(sc_module_name name);
-		~Reader();
+public:
 
-		// Ports
-		sc_port<LMBIF> dataPortRAM;										// Port pour la mémoire de donnée
-	
-		virtual unsigned int Read(unsigned int offset);					// Implement InterfaceRead function
+	// Méthode
+	virtual void Write(unsigned int offset, unsigned int data) = 0;
+
 };
 

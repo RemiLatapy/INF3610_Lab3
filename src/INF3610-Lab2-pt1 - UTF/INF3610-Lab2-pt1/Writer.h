@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 //
-//	Reader.h
+//	Writer.h
 //
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -8,22 +8,22 @@
 
 #include <systemc.h>
 #include "LMBIF.h"
-#include "InterfaceRead.h"
+#include "InterfaceWrite.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-//	Class Reader
+//	Class Writer
 //
 ///////////////////////////////////////////////////////////////////////////////
-class Reader : sc_channel, InterfaceRead
+class Writer : sc_channel, InterfaceWrite
 {
-	public:
-		Reader(sc_module_name name);
-		~Reader();
+public:
+	Writer(sc_module_name name);
+	~Writer();
 
-		// Ports
-		sc_port<LMBIF> dataPortRAM;										// Port pour la mémoire de donnée
-	
-		virtual unsigned int Read(unsigned int offset);					// Implement InterfaceRead function
+	// Ports
+	sc_port<LMBIF> dataPortRAM;										// Port pour la mémoire de donnée
+
+	virtual void Write(unsigned int offset, unsigned int data);				// Implement InterfaceWrite function
 };
 
