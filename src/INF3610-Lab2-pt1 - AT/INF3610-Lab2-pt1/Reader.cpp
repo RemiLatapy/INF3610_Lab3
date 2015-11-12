@@ -52,7 +52,7 @@ void Reader::thread(void)
 		do 
 		{
 			wait(clk->posedge_event());
-		} while (request->read());
+		} while (request.read());
 
 		ack.write(false);
 	}

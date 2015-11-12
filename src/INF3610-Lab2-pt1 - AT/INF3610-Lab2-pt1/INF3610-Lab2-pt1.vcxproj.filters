@@ -53,12 +53,6 @@
     <ClInclude Include="LMBIF.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="InterfaceRead.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="InterfaceWrite.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
     <ClInclude Include="Writer.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>

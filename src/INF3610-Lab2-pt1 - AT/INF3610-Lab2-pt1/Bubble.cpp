@@ -48,40 +48,40 @@ void Bubble::thread(void)
 	while (1)
 	{
 		int addr = 0;
-		address->write(addr);
-		requestRead->write(true);
+		address.write(addr);
+		requestRead.write(true);
 		do 
 		{
 			wait(clk->posedge_event());
-		} while (!ack->read());
+		} while (!ack.read());
 
-		unsigned int numVal = data->read();
+		unsigned int numVal = data.read();
 		valueTab = new unsigned int[numVal];
-		requestRead->write(false);
+		requestRead.write(false);
 
 		do 
 		{
 			wait(clk->posedge_event());
-		} while (ack->read());
+		} while (ack.read());
 		
 		//reading all values
 		addr += 4;
 		for (unsigned int i = 0; i < numVal; i++)
 		{
-			address->write(addr);
-			requestRead->write(true);
+			address.write(addr);
+			requestRead.write(true);
 			do
 			{
 				wait(clk->posedge_event());
-			} while (!ack->read());
+			} while (!ack.read());
 
-			valueTab [i]= data->read();
-			requestRead->write(false);
+			valueTab [i]= data.read();
+			requestRead.write(false);
 
 			do
 			{
 				wait(clk->posedge_event());
-			} while (ack->read());
+			} while (ack.read());
 			addr += 4;
 		}
 
@@ -90,24 +90,25 @@ void Bubble::thread(void)
 		//writing all values
 		for (unsigned int i = 0; i < numVal; i++)
 		{
-			address->write(addr);
-			data->write(valueTab[i]);
-			requestWrite->write(true);
+			address.write(addr);
+			data.write(valueTab[i]);
+			requestWrite.write(true);
 			do
 			{
 				wait(clk->posedge_event());
-			} while (!ack->read());
+			} while (!ack.read());
 
 			requestWrite.write(false);
 			do
 			{
 				wait(clk->posedge_event());
-			} while (ack->read());
+			} while (ack.read());
 
 			addr += 4;
 		}
 
 		sc_stop();
+		wait(1);
 	}
 }
 

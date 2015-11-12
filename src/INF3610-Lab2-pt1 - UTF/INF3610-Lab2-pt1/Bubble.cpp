@@ -52,6 +52,7 @@ void Bubble::thread(void)
 		}
 
 		sc_stop();
+		wait(1);
 	}
 }
 
