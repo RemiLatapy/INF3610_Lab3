@@ -15,15 +15,16 @@
 //	Class Bubble
 //
 ///////////////////////////////////////////////////////////////////////////////
-class Bubble /* À compléter */
+class Bubble : public sc_module /* À compléter */
 {
 	public: 
 		// Ports
-		/*
-		
-		À compléter
-		
-		*/
+		sc_in_clk clk;
+		sc_out<unsigned int> address;
+		sc_inout<unsigned int> data;
+		sc_out<bool> requestRead;
+		sc_out<bool> requestWrite;
+		sc_in<bool> ack;
 
 	
 		// Constructor
@@ -39,7 +40,8 @@ class Bubble /* À compléter */
 		
 		*/
 
-		
+		SC_HAS_PROCESS(Bubble);
+		unsigned int *valueTab;
 		void thread(void);
 		void bubbleSort(unsigned int *ptr, int counter);
 };

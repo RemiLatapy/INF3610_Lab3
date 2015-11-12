@@ -14,17 +14,19 @@
 //	Class Reader
 //
 ///////////////////////////////////////////////////////////////////////////////
-class Reader /* À compléter */
+class Reader : public sc_channel
 {
 	public:
 		// Ports
 		/*
-		
 		À compléter
-		
 		*/
-
-		
+		sc_port<LMBIF> dataPortRAM;
+		sc_in_clk clk;
+		sc_out<unsigned int> data;
+		sc_in<unsigned int> address;
+		sc_out<bool> ack;
+		sc_in<bool> request;
 		// Constructor
 		Reader( sc_module_name name );
 
@@ -33,11 +35,7 @@ class Reader /* À compléter */
 
 	private:
 		// Process SystemC
-		/*
-		
-		À compléter
-		
-		*/
+		SC_HAS_PROCESS(Reader);
 		
 		void thread(void);
 };

@@ -35,18 +35,23 @@ Bubble::~Bubble()
 ///////////////////////////////////////////////////////////////////////////////
 void Bubble::thread(void)
 {
-	unsigned int numVal = readPort->Read(0);
-	valueTab = new unsigned int[numVal];
-	unsigned int addr = 4;
-	for (unsigned int i = 0; i < numVal; i++) {
-		valueTab[i] = readPort->Read(addr);
-		addr += 4;
-	}
-	bubbleSort(valueTab, numVal);
-	addr = 4;
-	for (unsigned int i = 0; i < numVal; i++) {
-		writePort->Write(addr, valueTab[i]);
-		addr += 4;
+	while (1)
+	{
+		unsigned int numVal = readPort->Read(0);
+		valueTab = new unsigned int[numVal];
+		unsigned int addr = 4;
+		for (unsigned int i = 0; i < numVal; i++) {
+			valueTab[i] = readPort->Read(addr);
+			addr += 4;
+		}
+		bubbleSort(valueTab, numVal);
+		addr = 4;
+		for (unsigned int i = 0; i < numVal; i++) {
+			writePort->Write(addr, valueTab[i]);
+			addr += 4;
+		}
+
+		sc_stop();
 	}
 }
 

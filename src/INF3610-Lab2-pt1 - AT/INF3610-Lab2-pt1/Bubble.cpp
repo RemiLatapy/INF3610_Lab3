@@ -12,13 +12,14 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 Bubble::Bubble( sc_module_name name )
-/* À compléter */
+:sc_module(name)
 {
 	/*
 	
 	À compléter
 	
 	*/
+	SC_THREAD(thread);
 }
 
 
@@ -44,12 +45,70 @@ Bubble::~Bubble()
 ///////////////////////////////////////////////////////////////////////////////
 void Bubble::thread(void)
 {
-	/*
-	
-	À compléter
-	
-	*/
+	while (1)
+	{
+		int addr = 0;
+		address->write(addr);
+		requestRead->write(true);
+		do 
+		{
+			wait(clk->posedge_event());
+		} while (!ack->read());
 
+		unsigned int numVal = data->read();
+		valueTab = new unsigned int[numVal];
+		requestRead->write(false);
+
+		do 
+		{
+			wait(clk->posedge_event());
+		} while (ack->read());
+		
+		//reading all values
+		addr += 4;
+		for (unsigned int i = 0; i < numVal; i++)
+		{
+			address->write(addr);
+			requestRead->write(true);
+			do
+			{
+				wait(clk->posedge_event());
+			} while (!ack->read());
+
+			valueTab [i]= data->read();
+			requestRead->write(false);
+
+			do
+			{
+				wait(clk->posedge_event());
+			} while (ack->read());
+			addr += 4;
+		}
+
+		bubbleSort(valueTab, numVal);
+		addr = 4;
+		//writing all values
+		for (unsigned int i = 0; i < numVal; i++)
+		{
+			address->write(addr);
+			data->write(valueTab[i]);
+			requestWrite->write(true);
+			do
+			{
+				wait(clk->posedge_event());
+			} while (!ack->read());
+
+			requestWrite.write(false);
+			do
+			{
+				wait(clk->posedge_event());
+			} while (ack->read());
+
+			addr += 4;
+		}
+
+		sc_stop();
+	}
 }
 
 

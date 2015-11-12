@@ -11,13 +11,10 @@
 //
 ///////////////////////////////////////////////////////////////////////////////
 Reader::Reader(sc_module_name name)
-/* À compléter */
+:sc_channel(name)
 {
-	/*
-	
-	À compléter
-	
-	*/
+	/*À compléter*/
+	SC_THREAD(thread);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -41,9 +38,22 @@ Reader::~Reader()
 ///////////////////////////////////////////////////////////////////////////////
 void Reader::thread(void)
 {
-	/*
-	
-	À compléter
-	
-	*/
+
+	while (1)
+	{
+		do 
+		{
+			wait(clk->posedge_event());
+		} while (!request.read());
+
+		data.write( dataPortRAM->Read(address.read()) );
+
+		ack.write(true);
+		do 
+		{
+			wait(clk->posedge_event());
+		} while (request->read());
+
+		ack.write(false);
+	}
 }
